@@ -5,6 +5,7 @@ const uglifycss = require('gulp-uglifycss')
 const concat = require('gulp-concat')
 const babel = require('gulp-babel')
 
+// ver aula 61 (em caso de duvidas)
 
 gulp.task('app', ['app.html', 'app.css', 'app.js', 'app.assets'])
 
