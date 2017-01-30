@@ -21,7 +21,7 @@
     "url": "https://github.com/leonardocintra/controlefinanceiro-frontend/issues"
   },
   "homepage": "https://github.com/leonardocintra/controlefinanceiro-frontend#readme",
-  "dependencies": {
+  "devDependencies": {
     "admin-lte": "^2.3.11",
     "angular": "^1.6.1",
     "angular-animate": "^1.6.1",
@@ -37,9 +37,7 @@
     "gulp-uglifycss": "^1.0.6",
     "gulp-util": "^3.0.8",
     "gulp-watch": "^4.3.11",
-    "gulp-webserver": "^0.9.1"
-  },
-  "devDependencies": {
+    "gulp-webserver": "^0.9.1",
     "gulp-clean": "^0.3.2"
   }
 }
