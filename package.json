@@ -3,7 +3,11 @@
   "version": "1.0.0",
   "description": "Front End",
   "main": "index.js",
+  "engines": {
+    "node": "6.9.1"
+  },
   "scripts": {
+    "start": "gulp",
     "dev": "gulp",
     "production": "gulp --production"
   },
