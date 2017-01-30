@@ -5,18 +5,19 @@
     ])
 
     function DasboardController($http) {
-        const self = this
-        self.getSummary = function() {
+        /* vm = ViewModel */
+        const vm = this 
+        vm.getSummary = function() {
             const url = 'https://controlefinanceiro-api.herokuapp.com/api/billingSummary'
             $http.get(url).then(function(response) {
                 const { credit = 0, debt = 0} = response.data
-                self.credit = credit
-                self.debt = debt
-                self.total = credit - debt    
+                vm.credit = credit
+                vm.debt = debt
+                vm.total = credit - debt    
             })
         }
 
-        self.getSummary()
+        vm.getSummary()
     }
 })()
 
