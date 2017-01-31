@@ -6,22 +6,30 @@
 (function() {
     angular.module('primeiraApp').controller('BillingCycleCtrl', [
         '$http',
+        '$location',
         'messages',
         'tabs',
         BillingCycleController
     ])
 
-    function BillingCycleController($http, messages, tabs) {
+    function BillingCycleController($http, $location, messages, tabs) {
         const vm = this /* VM = View Model (padrao Jonh Papper) */
         const url = "https://controlefinanceiro-api.herokuapp.com/api/billingCycles"
 
         /* GET */
         vm.refresh = function() {
-            $http.get(url).then(function(response) {
+            const page = parseInt($location.search().page) || 1
+            /* paginacao com node-restful - Ver documentacao abaixo
+               https://github.com/baugarten/node-restful#limiting-the-number-and-skipping-items */ 
+            $http.get(`${url}?skip=${(page - 1) * 2}&limit=2`).then(function(response) {
                 vm.billingCycle = {credits: [{}], debts: [{}]}
                 vm.billingCycles = response.data
                 vm.calculateValues()
                 tabs.show(vm, {tabList: true, tabCreate: true})
+
+                $http.get(`${url}/count`).then(function(response) {
+                    vm.pages = Math.ceil(response.data.value / 2)
+                })
             })
         }
 
