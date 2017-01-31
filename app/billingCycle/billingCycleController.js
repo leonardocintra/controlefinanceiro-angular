@@ -14,28 +14,29 @@
 
     function BillingCycleController($http, $location, messages, tabs) {
         const vm = this /* VM = View Model (padrao Jonh Papper) */
-        const url = "https://controlefinanceiro-api.herokuapp.com/api/billingCycles"
+        const apiUrl = "https://controlefinanceiro-api.herokuapp.com/api/billingCycles"
 
         /* GET */
         vm.refresh = function() {
             const page = parseInt($location.search().page) || 1
+            const urlPage = `${apiUrl}?skip=${(page - 1) * 4}&limit=4`
             /* paginacao com node-restful - Ver documentacao abaixo
                https://github.com/baugarten/node-restful#limiting-the-number-and-skipping-items */ 
-            $http.get(`${url}?skip=${(page - 1) * 2}&limit=2`).then(function(response) {
+            $http.get(urlPage).then(function(response) {
                 vm.billingCycle = {credits: [{}], debts: [{}]}
                 vm.billingCycles = response.data
                 vm.calculateValues()
-                tabs.show(vm, {tabList: true, tabCreate: true})
 
-                $http.get(`${url}/count`).then(function(response) {
-                    vm.pages = Math.ceil(response.data.value / 2)
+                $http.get(`${apiUrl}/count`).then(function(response) {
+                    vm.pages = Math.ceil(response.data.value / 4)
+                    tabs.show(vm, {tabList: true, tabCreate: true})
                 })
             })
         }
 
         /* POST */
         vm.create = function() {
-            $http.post(url, vm.billingCycle).then(function(response) {
+            $http.post(apiUrl, vm.billingCycle).then(function(response) {
                 vm.refresh()
                 messages.addSuccess('Operação realizada com sucesso!')
             }).catch(function(response) {
@@ -47,7 +48,7 @@
         vm.delete = function() { 
             /*   Em vm.delete e vm.update não precisa do paramtro pois o vm.biilingCycle é 
              * setado quando invoca o metodo showTabDelete e showTabUpdate */
-            const deleteUrl = `${url}/${vm.billingCycle._id}`
+            const deleteUrl = `${apiUrl}/${vm.billingCycle._id}`
             $http.delete(deleteUrl, vm.billingCycle).then(function(response) {
                 vm.refresh()
                 messages.addSuccess('Registro excluido com sucesso!')
@@ -58,7 +59,7 @@
 
         /* PUT (update) */
         vm.update = function() {
-            const updateUrl = `${url}/${vm.billingCycle._id}`
+            const updateUrl = `${apiUrl}/${vm.billingCycle._id}`
             $http.put(updateUrl, vm.billingCycle).then(function(response) {
                 vm.refresh()
                 messages.addSuccess('Registro atualizado com sucoesso!')
