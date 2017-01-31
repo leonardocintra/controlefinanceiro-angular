@@ -35,8 +35,9 @@
         }
 
         /* DELETE */
-        vm.delete = function() {
-            // não precisou passar o parametro, pois ja vem no metodo showTabDelete que ja seta o billingCycle
+        vm.delete = function() { 
+            /*   Em vm.delete e vm.update não precisa do paramtro pois o vm.biilingCycle é 
+             * setado quando invoca o metodo showTabDelete e showTabUpdate */
             const deleteUrl = `${url}/${vm.billingCycle._id}`
             $http.delete(deleteUrl, vm.billingCycle).then(function(response) {
                 vm.refresh()
@@ -45,6 +46,18 @@
                 messages.addError(response.data.errors)
             })
         }
+
+        /* PUT (update) */
+        vm.update = function() {
+            const updateUrl = `${url}/${vm.billingCycle._id}`
+            $http.put(updateUrl, vm.billingCycle).then(function(response) {
+                vm.refresh()
+                messages.addSuccess('Registro atualizado com sucoesso!')
+            }).catch(function(response) {
+                messages.addError(response.data.errors)
+            })
+        }
+
 
         
         vm.showTabUpdate = function(billingCycle) {
