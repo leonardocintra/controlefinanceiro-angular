@@ -2,7 +2,8 @@
 Front End 
 
 - Angular 1
-- Backend API: (clique aqui)[https://controlefinanceiro-api.herokuapp.com/]
+- Backend API: https://controlefinanceiro-api.herokuapp.com/
+- Backend Code: https://github.com/leonardocintra/controlefinanceiro-backend
 
 ## Instalação
     npm install
