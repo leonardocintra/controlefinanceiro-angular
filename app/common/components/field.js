@@ -1,11 +1,16 @@
 /* 
     model: '=' . 
-    É um binding de duas direcoes, ou seja, o controller é alimentado por aqui, algo assim: 
+        É um binding de duas direcoes, ou seja, o controller é alimentado por aqui, algo assim: 
     Tudo que for alterado no componente sera refletido no controller e vice e versa
     Acaba usando uma diretiva do Angular (controller) ng-model (ver template abaixo)
     explicacao para relembrar: https://www.udemy.com/mean-primeira-aplicacao-do-zero/learn/v4/t/lecture/6192108
 
     minuto da explicacao: 9:31 min
+
+    readonly: '<'
+        É um binding de uma direcao, ou seja, se for alterado no componente nao surtira efeito no controller.
+    esse exemplo é usado no botao excluir
+
 */
 
 (function() {
@@ -17,6 +22,7 @@
             placeholder: '@',
             type: '@',
             model: '=',
+            readonly: '<',
         },
         controller: [
             'gridSystem',
@@ -32,7 +38,7 @@
                 <div class="form-group">
                     <label for="{{ $ctrl.id}}">{{ $ctrl.label }}</label>
                     <input id="{{ $ctrl.id}}" class="form-control" placeholder="{{ $ctrl.placeholder }}"
-                        type="{{ $ctrl.type }}" ng-model="$ctrl.model" >
+                        type="{{ $ctrl.type }}" ng-model="$ctrl.model" ng-readonly="$ctrl.readonly" >
                 </div>
             </div>
         `
