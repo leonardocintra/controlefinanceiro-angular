@@ -34,6 +34,18 @@
             })
         }
 
+        /* DELETE */
+        vm.delete = function() {
+            // não precisou passar o parametro, pois ja vem no metodo showTabDelete que ja seta o billingCycle
+            const deleteUrl = `${url}/${vm.billingCycle._id}`
+            $http.delete(deleteUrl, vm.billingCycle).then(function(response) {
+                vm.refresh()
+                messages.addSuccess('Registro excluido com sucesso!')
+            }).catch(function(response) {
+                messages.addError(response.data.errors)
+            })
+        }
+
         
         vm.showTabUpdate = function(billingCycle) {
             vm.billingCycle = billingCycle
