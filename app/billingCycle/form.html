@@ -10,9 +10,9 @@
     </div>
     
     <div class="box-footer">
-        <button class="btn btn-primary" ng-click="bcCtrl.create()">Incluir</button>
-        <button class="btn btn-info">Alterar</button>
-        <button class="btn btn-danger">Excluirr</button>
+        <button class="btn btn-primary" ng-click="bcCtrl.create()" ng-if="bcCtrl.tabCreate" >Incluir</button>
+        <button class="btn btn-info" ng-if="bcCtrl.tabUpdate">Alterar</button>
+        <button class="btn btn-danger" ng-if="bcCtrl.tabDelete">Excluirr</button>
         <button class="btn btn-default">Cancelar</button>
     </div>
 </div>
